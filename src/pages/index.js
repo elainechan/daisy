@@ -8,7 +8,7 @@ const IndexPage = ({data}) => {
   <div>
     {data.allMarkdownRemark.edges.map(({node}) => (
       <div key={node.id} className="article-box">
-        <h3 className="title">{node.frontmatter.title}</h3>
+        <Link to={node.fields.slug} style={{textDecoration: 'none', color: 'inherit'}}><h3 className="title">{node.frontmatter.title}</h3></Link>
         <p className="author">{node.frontmatter.author}</p>
         <p className="date">{node.frontmatter.date} {node.timeToRead}min read</p>
         <p className="excerpt">{node.excerpt}</p>
@@ -26,6 +26,9 @@ query HomePageQuery{
     totalCount
     edges {
       node {
+        fields {
+          slug
+        }
         frontmatter {
           title
           date
